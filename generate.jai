@@ -28,7 +28,7 @@ generate_bindings :: () -> bool {
 
         #if OS == .WINDOWS {
             output_filename = "bindings/windows/windows.jai";
-            array_add(*libpaths, "bindings/windows/x64");
+            array_add(*library_search_paths, "bindings/windows/x64");
 
             footer = FOOTER_WIN;
             generate_library_declarations = false;
@@ -36,7 +36,7 @@ generate_bindings :: () -> bool {
         } /*else #if OS == .LINUX {
             strip_flags = 0;
             output_filename = "linux/linux.jai";
-            array_add(*libpaths, "linux/bin");
+            array_add(*library_search_paths, "linux/bin");
 
             footer = FOOTER_LINUX;
             generate_library_declarations = false;
@@ -48,7 +48,7 @@ generate_bindings :: () -> bool {
             assert(false, "this OS is currently unsupported. You might be able to add support for it though!");
         }
 
-        array_add(*libnames, "assimp");
+        array_add(*libraries, {filename="assimp"});
         array_add(*include_paths, "include");
         array_add(*source_files, "include/assimp/aabb.h");
         array_add(*source_files, "include/assimp/anim.h");
